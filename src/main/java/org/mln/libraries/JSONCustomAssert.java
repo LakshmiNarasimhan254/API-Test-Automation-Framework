@@ -40,6 +40,7 @@ public class JSONCustomAssert {
     }
 
 
+
     public static void jsonCustomAssertEquals(String actualJSON, String expectedJSON) {
         if (!expectedJSON.equalsIgnoreCase("")) {
             assertThatJson(actualJSON).isEqualTo(expectedJSON);
