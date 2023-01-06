@@ -2,6 +2,7 @@ package org.mln.utils;
 
 
 import org.mln.constants.FrameworkConstants;
+import org.mln.customexceptions.CustomException;
 import org.mln.enums.ConfigProperties;
 
 import java.io.FileInputStream;
@@ -39,7 +40,7 @@ public class PropertyUtil {
          */
         public static String getValue(ConfigProperties key)  {
         if (Objects.isNull(CONFIGMAP.get(key.name().toLowerCase())) ||(Objects.isNull(CONFIGMAP.get(key.name().toLowerCase())))) {
-            throw new RuntimeException("Property Named " + key + " is not found.Please check in :"+ FrameworkConstants.getCONFIGPATH() +".");
+            throw new CustomException("Property Named " + key + " is not found.Please check in :"+ FrameworkConstants.getCONFIGPATH() +".");
 
         }
         return CONFIGMAP.get(key.toString().toLowerCase());

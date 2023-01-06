@@ -1,12 +1,11 @@
 package org.mln.libraries;
 
 import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
-import org.codehaus.groovy.transform.SourceURIASTTransformation;
+
 
 import java.util.Objects;
 
@@ -26,7 +25,7 @@ public class RestResponse {
 
     public static RestResponse getRestResponse(RequestBuilder requestBuilder) {
        RestResponse restResponse = new RestResponse();
-        Headers requestHeaders = requestBuilder.getHeaders();
+
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
 
         if (Objects.nonNull(requestBuilder.getContentType())) {

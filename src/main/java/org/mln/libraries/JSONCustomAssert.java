@@ -2,6 +2,7 @@ package org.mln.libraries;
 
 
 
+import net.javacrumbs.jsonunit.assertj.JsonAssert;
 import org.json.JSONException;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
@@ -16,13 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class JSONCustomAssert {
+public final class JSONCustomAssert {
+
+    private static final String ACTUALJSON = "Actual JSON : ";
+    private static final String EXPECTEDJSON = "Actual JSON : ";
 
     private JSONCustomAssert() {
     }
 
     public static void jsonCustomAssertEqualsWithPath(String actualJSON, String expectedJSON, String path) {
-        boolean testResult =false;
         if (!expectedJSON.equals("")) {
             assertThatJson(actualJSON)
                     .inPath(path)
@@ -30,8 +33,13 @@ public class JSONCustomAssert {
         } else {
             assertThatJson(actualJSON).isEqualTo(expectedJSON);
         }
-        ExtentLogger.info("Actual JSON :" + returnJSONString(actualJSON));
-        ExtentLogger.info("Expected JSON :" + returnJSONString(expectedJSON));
+        ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
+        ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
+    }
+
+    public static JsonAssert.ConfigurableJsonAssert jsonCustomAssert(String actualJSON) {
+        ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
+        return assertThatJson(actualJSON);
     }
 
     public static void jsonCustomAssertIsArray(String actualJSON, String path) {
@@ -39,20 +47,15 @@ public class JSONCustomAssert {
                 .node(path).isArray();
     }
 
-
-
     public static void jsonCustomAssertEquals(String actualJSON, String expectedJSON) {
-        if (!expectedJSON.equalsIgnoreCase("")) {
-            assertThatJson(actualJSON).isEqualTo(expectedJSON);
-        } else {
-            assertThatJson(actualJSON).isEqualTo(expectedJSON);
-        }
-        ExtentLogger.info("Actual JSON :" + returnJSONString(actualJSON));
-        ExtentLogger.info("Expected JSON :" + returnJSONString(expectedJSON));
+
+        assertThatJson(actualJSON).isEqualTo(expectedJSON);
+        ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
+        ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
     }
 
     public static void jsonCustomAssertEqualsIgnoreNodes(String actualJSON, String expectedJSON, List<String> ignoreNodes) {
-        ExtentLogger.info("Actual JSON :" + returnJSONString(actualJSON));
+        ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
         if (!expectedJSON.equalsIgnoreCase("")) {
             actualJSON = removeIgnoredNodes(actualJSON, ignoreNodes.toArray(new String[0]));
             expectedJSON = removeIgnoredNodes(expectedJSON, ignoreNodes.toArray(new String[0]));
@@ -61,11 +64,11 @@ public class JSONCustomAssert {
             assertThatJson(actualJSON).isEqualTo(expectedJSON);
         }
 
-        ExtentLogger.info("Expected JSON :" + returnJSONString(expectedJSON));
+        ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
     }
 
     public static void jsonCustomAssertEqualsIgnoreValues(String actualJSON, String expectedJSON, ArrayList<String> ignoreValueForNodes) {
-        ExtentLogger.info("Actual JSON :" + returnJSONString(actualJSON));
+        ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
         if (!expectedJSON.equalsIgnoreCase("")) {
             actualJSON = populateDefaultValueForNodes(actualJSON, ignoreValueForNodes.toArray(new String[0]));
             expectedJSON = populateDefaultValueForNodes(expectedJSON, ignoreValueForNodes.toArray(new String[0]));
@@ -73,11 +76,11 @@ public class JSONCustomAssert {
         } else {
             assertThatJson(actualJSON).isEqualTo(expectedJSON);
         }
-        ExtentLogger.info("Expected JSON :" + returnJSONString(expectedJSON));
+        ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
     }
 
     public static void jsonCustomAssertEqualsPartial(String actualJSON, String expectedJSON, ArrayList<String> ignoreNodes, ArrayList<String> ignoreValueForNodes) {
-        ExtentLogger.info("Actual JSON :" + returnJSONString(actualJSON));
+        ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
         if (!expectedJSON.equalsIgnoreCase("")) {
             actualJSON = removeIgnoredNodes(actualJSON, ignoreNodes.toArray(new String[0]));
             expectedJSON = removeIgnoredNodes(expectedJSON, ignoreNodes.toArray(new String[0]));
@@ -90,7 +93,7 @@ public class JSONCustomAssert {
         } else {
             assertThatJson(actualJSON).isEqualTo(expectedJSON);
         }
-        ExtentLogger.info("Expected JSON :" + returnJSONString(expectedJSON));
+        ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
     }
 
     private static String populateDefaultValueForNodes(String inputJSON, String[] ignoreValueForNodes) {

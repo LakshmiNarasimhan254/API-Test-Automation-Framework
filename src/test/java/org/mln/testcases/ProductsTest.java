@@ -1,5 +1,6 @@
 package org.mln.testcases;
 
+import net.javacrumbs.jsonunit.core.Option;
 import org.assertj.core.api.Assertions;
 import org.json.JSONException;
 import org.mln.annotations.TestInfo;
@@ -38,6 +39,9 @@ private ProductsTest(){}
         RequestBuilder requestBuilder = new RequestBuilder(HTTPMethods.POST,url,auth,body);
         RestResponse response = RestResponse.getRestResponse(requestBuilder);
         JSONCustomAssert.jsonCustomAssertEquals(response.getResponse().asString(),expectedresponse);
+        JSONCustomAssert.jsonCustomAssert(response.getResponse().asString())
+                .inPath(testdata.get("JsonPath")).isEqualTo(testdata.get("Expected Value"));
+
     }
 
 

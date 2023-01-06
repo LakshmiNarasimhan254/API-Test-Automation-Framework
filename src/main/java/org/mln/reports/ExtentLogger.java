@@ -1,8 +1,5 @@
 package org.mln.reports;
 
-import com.aventstack.extentreports.MediaEntityBuilder;
-import org.mln.enums.ConfigProperties;
-import org.mln.utils.PropertyUtil;
 
 /**
  * This class is used to log the test steps in the extent report

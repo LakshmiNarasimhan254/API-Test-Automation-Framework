@@ -23,6 +23,7 @@
         <assertj-core.version>3.23.1</assertj-core.version>
         <jsonassert.version>1.5.1</jsonassert.version>
         <extentreports.version>5.0.9</extentreports.version>
+        <surefire-Plugin.version>3.0.0-M7</surefire-Plugin.version>
     </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
@@ -116,7 +117,21 @@
             <artifactId>extentreports</artifactId>
             <version>${extentreports.version}</version>
         </dependency>
-
-
     </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire-Plugin.version}</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>testng.xml</suiteXmlFile>
+                        </suiteXmlFiles>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
