@@ -6,6 +6,9 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.mln.constants.FrameworkConstants;
 import org.mln.enums.ConfigProperties;
+import org.mln.enums.HTTPMethods;
+import org.mln.libraries.RequestBuilder;
+import org.mln.libraries.RestResponse;
 import org.mln.utils.CommonUtil;
 import org.mln.utils.JSONUtil;
 import org.mln.utils.PropertyUtil;
@@ -27,6 +30,7 @@ public class BaseTest {
    protected ArrayList<String>ignoreValueList;
 
    protected String expectedresponse;
+   protected String actualResponse;
     protected BaseTest() {}
 
     @BeforeMethod
@@ -46,5 +50,9 @@ public class BaseTest {
         if(!dataMap.get("Ignore Value List").equals("")){
             ignoreValueList= CommonUtil.getIgnoreList(dataMap.get("Ignore Value List"));
         }
+        String body = "";
+        RequestBuilder requestBuilder = new RequestBuilder(HTTPMethods.GET,url,auth);
+        RestResponse response = RestResponse.getRestResponse(requestBuilder);
+
     }
 }

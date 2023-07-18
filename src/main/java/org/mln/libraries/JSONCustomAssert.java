@@ -25,6 +25,14 @@ public final class JSONCustomAssert {
     private JSONCustomAssert() {
     }
 
+    /**
+     * Compares two JSON strings using JSON path and asserts their equality.
+     *
+     * @param actualJSON The actual JSON string to be compared.
+     * @param expectedJSON The expected JSON string to be compared against.
+     * @param path The JSON path to focus the comparison on.
+     *               Pass an empty string ("") if no specific path needs to be specified.
+     */
     public static void jsonCustomAssertEqualsWithPath(String actualJSON, String expectedJSON, String path) {
         if (!expectedJSON.equals("")) {
             assertThatJson(actualJSON)
@@ -37,16 +45,35 @@ public final class JSONCustomAssert {
         ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
     }
 
+    /**
+     * This method performs a custom JSON assertion by logging the actual JSON and its corresponding return JSON string.
+     * It returns a `configurablejsonassert` object that can be used to perform assertions.
+     *
+     * @param actualJSON The actual JSON string to be asserted.
+     * @return A `configurablejsonassert` object used for performing assertions.
+     */
     public static JsonAssert.ConfigurableJsonAssert jsonCustomAssert(String actualJSON) {
         ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
         return assertThatJson(actualJSON);
     }
 
+    /**
+     * Asserts that the specified JSON string is an array at the specified path.
+     *
+     * @param actualJSON The actual JSON string to be validated.
+     * @param path The path to the array within the JSON.
+     */
     public static void jsonCustomAssertIsArray(String actualJSON, String path) {
         assertThatJson(actualJSON)
                 .node(path).isArray();
     }
 
+    /**
+     * This method performs a custom JSON assertion by comparing the actual JSON string with the expected JSON string.
+     *
+     * @param actualJSON The actual JSON string to be compared.
+     * @param expectedJSON The expected JSON string for comparison.
+     */
     public static void jsonCustomAssertEquals(String actualJSON, String expectedJSON) {
 
         assertThatJson(actualJSON).isEqualTo(expectedJSON);
@@ -54,6 +81,13 @@ public final class JSONCustomAssert {
         ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
     }
 
+    /**
+     * This method compares two JSON strings with the ability to ignore specified nodes.
+     *
+     * @param actualJSON The actual JSON string.
+     * @param expectedJSON The expected JSON string.
+     * @param ignoreNodes A list of nodes to be ignored during the comparison.
+     */
     public static void jsonCustomAssertEqualsIgnoreNodes(String actualJSON, String expectedJSON, List<String> ignoreNodes) {
         ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
         if (!expectedJSON.equalsIgnoreCase("")) {
@@ -67,6 +101,14 @@ public final class JSONCustomAssert {
         ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
     }
 
+    /**
+     * Compares two JSON strings and performs custom assertions by ignoring specified values for nodes.
+     * Logs actual and expected JSON strings using ExtentLogger.
+     *
+     * @param actualJSON The JSON string to be compared.
+     * @param expectedJSON The JSON string to compare against.
+     * @param ignoreValueForNodes List of values to be ignored for specified nodes.
+     */
     public static void jsonCustomAssertEqualsIgnoreValues(String actualJSON, String expectedJSON, ArrayList<String> ignoreValueForNodes) {
         ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
         if (!expectedJSON.equalsIgnoreCase("")) {
@@ -79,6 +121,14 @@ public final class JSONCustomAssert {
         ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
     }
 
+    /**
+     * Compares two JSON strings and asserts their equality after removing certain nodes and populating default values.
+     *
+     * @param actualJSON           The actual JSON string.
+     * @param expectedJSON         The expected JSON string.
+     * @param ignoreNodes          A list of nodes to ignore while comparing.
+     * @param ignoreValueForNodes  A list of nodes for which default values should be populated.
+     */
     public static void jsonCustomAssertEqualsPartial(String actualJSON, String expectedJSON, ArrayList<String> ignoreNodes, ArrayList<String> ignoreValueForNodes) {
         ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
         if (!expectedJSON.equalsIgnoreCase("")) {
@@ -95,7 +145,14 @@ public final class JSONCustomAssert {
         }
         ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
     }
+    /**
 
+     Populates default values for specified nodes in the input JSON.
+     @param inputJSON The input JSON string.
+     @param ignoreValueForNodes An array of node names to ignore when populating default values.
+     @return The modified JSON string with default values populated.
+     @throws JsonException if there is an error in JSON processing.
+     @throws CustomException if there is an error during the default value population. */
     private static String populateDefaultValueForNodes(String inputJSON, String[] ignoreValueForNodes) {
         String returnJSON;
         int i = 0;
@@ -116,7 +173,15 @@ public final class JSONCustomAssert {
         returnJSON = inputJSON;
         return returnJSON;
     }
+    /**
 
+     This method is a recursive function that traverses a JSON object and populates default values for specific nodes.
+
+     @param jsonObject The current JSON object being traversed.
+
+     @param path The path to the node in the JSON object, using dot notation.
+
+     @throws JSONException If there are any issues with JSON parsing. */
     private static void traverseJSONObjectPopulateDefault(JSONObject jsonObject, String path) throws JSONException { //Recursive Function
         String[] pathArray = path.split("\\.");
         String currentNode = pathArray[0];

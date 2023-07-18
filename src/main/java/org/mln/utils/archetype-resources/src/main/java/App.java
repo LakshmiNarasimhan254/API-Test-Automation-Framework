@@ -1,5 +1,3 @@
-package $com.mln;
-
 /**
  * Hello world!
  *
