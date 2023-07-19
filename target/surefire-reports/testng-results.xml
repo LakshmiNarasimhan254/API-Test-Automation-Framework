@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="2" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-01-06T13:52:36 EST" name="All Test Suite" finished-at="2023-01-06T13:52:41 EST" duration-ms="4463">
+    <groups>
+    </groups>
+    <test started-at="2023-01-06T13:52:36 EST" name="C:/Users/laksh/git/ataf" finished-at="2023-01-06T13:52:41 EST" duration-ms="4463">
+      <class name="org.mln.testcases.ProductsTest">
+        <test-method is-config="true" signature="setUp([Ljava.lang.Object;,java.lang.reflect.Method)[pri:0, instance:org.mln.testcases.ProductsTest@201a4587]" started-at="2023-01-06T13:52:37 EST" name="setUp" finished-at="2023-01-06T13:52:37 EST" duration-ms="13" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.Object;@50a691d3]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[public void org.mln.testcases.ProductsTest.addAProduct(java.lang.Integer,java.util.HashMap) throws java.io.IOException,org.json.JSONException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="addAProduct(java.lang.Integer,java.util.HashMap)[pri:0, instance:org.mln.testcases.ProductsTest@201a4587]" started-at="2023-01-06T13:52:37 EST" name="addAProduct" description="This is a test to validate add a products" data-provider="getExcelData" finished-at="2023-01-06T13:52:40 EST" duration-ms="2683" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Path=products/add, TestName=addAProduct, Ignore Value List=, Expected Value=BMW Pencil, Ignore Node List=, Execute=Yes, Expected Response=Add_A_Product.json, Request Body=Add_A_Product.json, JsonPath=$.title}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addAProduct -->
+        <test-method is-config="true" signature="setUp([Ljava.lang.Object;,java.lang.reflect.Method)[pri:0, instance:org.mln.testcases.ProductsTest@201a4587]" started-at="2023-01-06T13:52:40 EST" name="setUp" finished-at="2023-01-06T13:52:40 EST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.Object;@557eb543]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[public void org.mln.testcases.ProductsTest.getAllProducts(java.lang.Integer,java.util.HashMap) throws java.io.IOException,org.json.JSONException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="getAllProducts(java.lang.Integer,java.util.HashMap)[pri:0, instance:org.mln.testcases.ProductsTest@201a4587]" started-at="2023-01-06T13:52:40 EST" name="getAllProducts" description="This is a test to validate get all products" data-provider="getExcelData" finished-at="2023-01-06T13:52:40 EST" duration-ms="390" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Path=products, TestName=getAllProducts, Ignore Value List=, Expected Value=, Ignore Node List=, Execute=Yes, Expected Response=Get_All_Product.json, Request Body=, JsonPath=}]]>
+              </value>
+            </param>
+          </params>
+          <exception class="net.javacrumbs.jsonunit.core.internal.BasicExceptionFactory$BasicJsonAssertError">
+            <message>
+              <![CDATA[JSON documents are different:
+Different value found in node "$.products[4].description", expected: <"Huaweiâ€™s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK."> but was: <"Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.">.
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[net.javacrumbs.jsonunit.core.internal.BasicExceptionFactory$BasicJsonAssertError: JSON documents are different:
+Different value found in node "$.products[4].description", expected: <"Huaweiâ€™s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK."> but was: <"Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.">.
+
+at net.javacrumbs.jsonunit.core.internal.BasicExceptionFactory.createException(ExceptionFactory.java:19)
+at net.javacrumbs.jsonunit.core.internal.ExceptionUtils.createException(ExceptionUtils.java:45)
+at net.javacrumbs.jsonunit.core.internal.Diff.failIfDifferent(Diff.java:617)
+at net.javacrumbs.jsonunit.assertj.JsonAssert.isEqualTo(JsonAssert.java:121)
+at org.mln.libraries.JSONCustomAssert.jsonCustomAssertEqualsWithPath(JSONCustomAssert.java:32)
+at org.mln.testcases.ProductsTest.getAllProducts(ProductsTest.java:25)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:962)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+at java.base/java.lang.Thread.run(Thread.java:834)
+]]>
+            </full-stacktrace>
+          </exception> <!-- net.javacrumbs.jsonunit.core.internal.BasicExceptionFactory$BasicJsonAssertError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAllProducts -->
+        <test-method is-config="true" signature="setUp([Ljava.lang.Object;,java.lang.reflect.Method)[pri:0, instance:org.mln.testcases.ProductsTest@201a4587]" started-at="2023-01-06T13:52:40 EST" name="setUp" finished-at="2023-01-06T13:52:40 EST" duration-ms="2" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[Ljava.lang.Object;@3b95d13c]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[public void org.mln.testcases.ProductsTest.getSingleProduct(java.lang.Integer,java.util.HashMap) throws java.io.IOException,org.json.JSONException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="getSingleProduct(java.lang.Integer,java.util.HashMap)[pri:0, instance:org.mln.testcases.ProductsTest@201a4587]" started-at="2023-01-06T13:52:40 EST" name="getSingleProduct" description="This is a test to validate get single product" data-provider="getExcelData" finished-at="2023-01-06T13:52:41 EST" duration-ms="374" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[0]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[{Path=products/1, TestName=getSingleProduct, Ignore Value List=, Expected Value=, Ignore Node List=images, Execute=Yes, Expected Response=Get_Single_Product.json, Request Body=, JsonPath=}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getSingleProduct -->
+      </class> <!-- org.mln.testcases.ProductsTest -->
+    </test> <!-- C:/Users/laksh/git/ataf -->
+  </suite> <!-- All Test Suite -->
+</testng-results>

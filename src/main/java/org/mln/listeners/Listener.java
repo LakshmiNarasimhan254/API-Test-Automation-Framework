@@ -66,9 +66,7 @@ public class Listener implements ITestListener, ISuiteListener {
     @Override
     // This method is called when a test is failed.
     public void onTestFailure(ITestResult result) {
-        ExtentLogger.fail(result.getMethod().getMethodName() + " is  Failed");
-        ExtentLogger.fail(Arrays.toString(result.getThrowable().getStackTrace()));
-
+        ExtentLogger.fail(result.getMethod().getMethodName() + " is  Failed. Reason: "+ result.getThrowable().getMessage());
     }
 
 

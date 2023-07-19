@@ -19,8 +19,8 @@ import java.util.List;
 
 public final class JSONCustomAssert {
 
-    private static final String ACTUALJSON = "Actual JSON : ";
-    private static final String EXPECTEDJSON = "Actual JSON : ";
+    private static final String ACTUALJSON = "Actual JSON : \n";
+    private static final String EXPECTEDJSON = "Expected JSON : \n";
 
     private JSONCustomAssert() {
     }
@@ -34,20 +34,27 @@ public final class JSONCustomAssert {
      *               Pass an empty string ("") if no specific path needs to be specified.
      */
     public static void jsonCustomAssertEqualsWithPath(String actualJSON, String expectedJSON, String path) {
-        if (!expectedJSON.equals("")) {
-            assertThatJson(actualJSON)
-                    .inPath(path)
-                    .isEqualTo(expectedJSON);
-        } else {
-            assertThatJson(actualJSON).isEqualTo(expectedJSON);
-        }
         ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
         ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
+        try {
+            if (!expectedJSON.equals("")) {
+                assertThatJson(actualJSON)
+                        .inPath(path)
+                        .isEqualTo(expectedJSON);
+            } else {
+                assertThatJson(actualJSON).isEqualTo(expectedJSON);
+            }
+        } catch (Exception e) {
+            throw new JsonException(e.getCause());
+        } finally {
+        }
+
     }
 
     /**
      * This method performs a custom JSON assertion by logging the actual JSON and its corresponding return JSON string.
-     * It returns a `configurablejsonassert` object that can be used to perform assertions.
+     * It returns a `configurablejsonassert` object that can be used to perform furthur assertions by leveraging the methods from.
+     *.assertj.JsonAssert library
      *
      * @param actualJSON The actual JSON string to be asserted.
      * @return A `configurablejsonassert` object used for performing assertions.
@@ -75,10 +82,16 @@ public final class JSONCustomAssert {
      * @param expectedJSON The expected JSON string for comparison.
      */
     public static void jsonCustomAssertEquals(String actualJSON, String expectedJSON) {
-
-        assertThatJson(actualJSON).isEqualTo(expectedJSON);
         ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
         ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
+
+        try {
+            assertThatJson(actualJSON).isEqualTo(expectedJSON);
+        } catch (Exception e) {
+            throw new JsonException(e.getCause());
+        } finally {
+        }
+
     }
 
     /**
@@ -90,15 +103,21 @@ public final class JSONCustomAssert {
      */
     public static void jsonCustomAssertEqualsIgnoreNodes(String actualJSON, String expectedJSON, List<String> ignoreNodes) {
         ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
-        if (!expectedJSON.equalsIgnoreCase("")) {
-            actualJSON = removeIgnoredNodes(actualJSON, ignoreNodes.toArray(new String[0]));
-            expectedJSON = removeIgnoredNodes(expectedJSON, ignoreNodes.toArray(new String[0]));
-            assertThatJson(actualJSON).isEqualTo(expectedJSON);
-        } else {
-            assertThatJson(actualJSON).isEqualTo(expectedJSON);
+        ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
+        try {
+            if (!expectedJSON.equalsIgnoreCase("")) {
+                actualJSON = removeIgnoredNodes(actualJSON, ignoreNodes.toArray(new String[0]));
+                expectedJSON = removeIgnoredNodes(expectedJSON, ignoreNodes.toArray(new String[0]));
+                assertThatJson(actualJSON).isEqualTo(expectedJSON);
+            } else {
+                assertThatJson(actualJSON).isEqualTo(expectedJSON);
+            }
+        } catch (Exception e) {
+            throw new JsonException(e.getCause());
+        } finally {
         }
 
-        ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
+
     }
 
     /**
@@ -111,14 +130,20 @@ public final class JSONCustomAssert {
      */
     public static void jsonCustomAssertEqualsIgnoreValues(String actualJSON, String expectedJSON, ArrayList<String> ignoreValueForNodes) {
         ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
-        if (!expectedJSON.equalsIgnoreCase("")) {
-            actualJSON = populateDefaultValueForNodes(actualJSON, ignoreValueForNodes.toArray(new String[0]));
-            expectedJSON = populateDefaultValueForNodes(expectedJSON, ignoreValueForNodes.toArray(new String[0]));
-            assertThatJson(actualJSON).isEqualTo(expectedJSON);
-        } else {
-            assertThatJson(actualJSON).isEqualTo(expectedJSON);
-        }
         ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
+        try {
+            if (!expectedJSON.equalsIgnoreCase("")) {
+                actualJSON = populateDefaultValueForNodes(actualJSON, ignoreValueForNodes.toArray(new String[0]));
+                expectedJSON = populateDefaultValueForNodes(expectedJSON, ignoreValueForNodes.toArray(new String[0]));
+                assertThatJson(actualJSON).isEqualTo(expectedJSON);
+            } else {
+                assertThatJson(actualJSON).isEqualTo(expectedJSON);
+            }
+        } catch (Exception e) {
+            throw new JsonException(e.getCause());
+        } finally {
+        }
+
     }
 
     /**
@@ -131,19 +156,25 @@ public final class JSONCustomAssert {
      */
     public static void jsonCustomAssertEqualsPartial(String actualJSON, String expectedJSON, ArrayList<String> ignoreNodes, ArrayList<String> ignoreValueForNodes) {
         ExtentLogger.info(ACTUALJSON + returnJSONString(actualJSON));
-        if (!expectedJSON.equalsIgnoreCase("")) {
-            actualJSON = removeIgnoredNodes(actualJSON, ignoreNodes.toArray(new String[0]));
-            expectedJSON = removeIgnoredNodes(expectedJSON, ignoreNodes.toArray(new String[0]));
-
-            actualJSON = populateDefaultValueForNodes(actualJSON, ignoreValueForNodes.toArray(new String[0]));
-            expectedJSON = populateDefaultValueForNodes(expectedJSON, ignoreValueForNodes.toArray(new String[0]));
-
-
-            assertThatJson(actualJSON).isEqualTo(expectedJSON);
-        } else {
-            assertThatJson(actualJSON).isEqualTo(expectedJSON);
-        }
         ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
+        try {
+            if (!expectedJSON.equalsIgnoreCase("")) {
+                actualJSON = removeIgnoredNodes(actualJSON, ignoreNodes.toArray(new String[0]));
+                expectedJSON = removeIgnoredNodes(expectedJSON, ignoreNodes.toArray(new String[0]));
+
+                actualJSON = populateDefaultValueForNodes(actualJSON, ignoreValueForNodes.toArray(new String[0]));
+                expectedJSON = populateDefaultValueForNodes(expectedJSON, ignoreValueForNodes.toArray(new String[0]));
+
+
+                assertThatJson(actualJSON).isEqualTo(expectedJSON);
+            } else {
+                assertThatJson(actualJSON).isEqualTo(expectedJSON);
+            }
+        } catch (Exception e) {
+            throw new JsonException(e.getCause());
+        } finally {
+        }
+        //ExtentLogger.info(EXPECTEDJSON + returnJSONString(expectedJSON));
     }
     /**
 
@@ -162,7 +193,7 @@ public final class JSONCustomAssert {
                 traverseJSONObjectPopulateDefault(actualJSONObject, ignoreValueForNodes[i]);
                 inputJSON = actualJSONObject.toString();
             }catch(JSONException e){
-                throw new JsonException(e.getMessage());
+                throw new JsonException(e.getCause());
             }
             catch (Exception e) {
                 throw new CustomException(e.getMessage());
@@ -231,7 +262,7 @@ public final class JSONCustomAssert {
                 traverseJSONObject(actualJSONObject, ignoreNodes[i]);
                 inputJSON = actualJSONObject.toString();
             }catch(JSONException e){
-            throw new JsonException(e.getMessage());
+            throw new JsonException(e.getCause());
         }
             catch (Exception e) {
             throw new CustomException(e.getMessage());

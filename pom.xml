@@ -11,7 +11,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <restassured.version>5.1.1</restassured.version>
-        <testng.version>7.6.0</testng.version>
+        <testng.version>7.4.0</testng.version>
         <jsonsimple.version>1.1.1</jsonsimple.version>
         <jacksondatabind.version>2.13.3</jacksondatabind.version>
         <jaywayJsonPath.version>2.7.0</jaywayJsonPath.version>

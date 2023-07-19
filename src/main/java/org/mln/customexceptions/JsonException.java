@@ -13,6 +13,6 @@ public class JsonException extends CustomException{
         super(message, cause);
     }
     public JsonException(Throwable cause) {
-        super("There is some json excpetion");
+        super("There is some json exception" + cause);
     }
 }

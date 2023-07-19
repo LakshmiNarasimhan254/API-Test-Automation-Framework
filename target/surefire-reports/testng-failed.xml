@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [All Test Suite]" guice-stage="DEVELOPMENT" verbose="0">
+  <listeners>
+    <listener class-name="org.mln.listeners.Listener"/>
+    <listener class-name="org.mln.listeners.MethodInterceptor"/>
+    <listener class-name="org.mln.listeners.AnnotationTransformer"/>
+  </listeners>
+  <test thread-count="5" parallel="methods" name="C:/Users/laksh/git/ataf(failed)" verbose="0">
+    <classes>
+      <class name="org.mln.testcases.ProductsTest">
+        <methods>
+          <include name="getAllProducts" invocation-numbers="0"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- org.mln.testcases.ProductsTest -->
+    </classes>
+  </test> <!-- C:/Users/laksh/git/ataf(failed) -->
+</suite> <!-- Failed suite [All Test Suite] -->
